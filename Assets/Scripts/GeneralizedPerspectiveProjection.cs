@@ -5,9 +5,6 @@ using UnityEngine;
 public class GeneralizedPerspectiveProjection : MonoBehaviour
 {
     [SerializeField]
-    private Transform _quadTrans = null;
-
-    [SerializeField]
     private Transform _pa = null;
 
     [SerializeField]
@@ -17,15 +14,10 @@ public class GeneralizedPerspectiveProjection : MonoBehaviour
     private Transform _pc = null;
 
     [SerializeField]
-    private Collider[] _colliders = null;
-
-    [SerializeField]
     private float _scale = 1f;
 
     private Transform _pe = null;
     private Camera _camera = null;
-
-    private Material _material = null;
 
     private void Awake()
     {
@@ -36,8 +28,6 @@ public class GeneralizedPerspectiveProjection : MonoBehaviour
     private void Update()
     {
         UpdateFrustrum();
-        ControlPlane();
-        CheckTargets();
     }
 
     private void UpdateFrustrum()
@@ -75,43 +65,5 @@ public class GeneralizedPerspectiveProjection : MonoBehaviour
 
         _camera.projectionMatrix = P;
         _camera.transform.rotation = Quaternion.LookRotation(-vn, vu);
-    }
-
-    private void ControlPlane()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            _quadTrans.transform.position -= _quadTrans.transform.right * 0.1f;
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            _quadTrans.transform.position += _quadTrans.transform.right * 0.1f;
-        }
-
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            _quadTrans.transform.position += _quadTrans.transform.up * 0.1f;
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            _quadTrans.transform.position -= _quadTrans.transform.up * 0.1f;
-        }
-    }
-
-    private void CheckTargets()
-    {
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_camera);
-
-        foreach (var col in _colliders)
-        {
-            col.GetComponent<Renderer>().material.color = Color.white;
-
-            if (GeometryUtility.TestPlanesAABB(planes, col.bounds))
-            {
-                col.GetComponent<Renderer>().material.color = Color.blue;
-            }
-        }
     }
 }
