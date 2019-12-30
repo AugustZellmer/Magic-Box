@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO viewport square object must match phone resolution
+
 public class GeneralizedPerspectiveProjection : MonoBehaviour
 {
     [SerializeField]
