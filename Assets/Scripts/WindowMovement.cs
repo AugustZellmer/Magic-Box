@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WindowMovement : MonoBehaviour
 {
-    private Gyroscope gyro;
-    [SerializeField] private Quaternion baseAngle = new Quaternion(0, 0, 0, 1);
 
     void Start()
     {
@@ -15,11 +13,11 @@ public class WindowMovement : MonoBehaviour
 
     void Update()
     {
-        transform.localRotation = new Quaternion(.5f, .5f, -.5f, .5f) * GyroToUnity(gyro.attitude) * Quaternion.Normalize(baseAngle);
+        transform.localRotation = GyroToUnity(gyro.attitude);
     }
 
     private static Quaternion GyroToUnity(Quaternion q)
     {
-        return new Quaternion(q.x, q.y, -q.z, -q.w);
+        return new Quaternion(.5f, .5f, -.5f, .5f) * q;
     }
 }
