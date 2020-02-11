@@ -1,1 +1,1 @@
-
+The accelerometer/gyroscope in pre ARCore phones is not accurate enough to do what I need without a lot of smoothing/correction. I do not know how to program good smoothing/correction. Therefore, this project is being shelved until I get a phone with ARCore.
